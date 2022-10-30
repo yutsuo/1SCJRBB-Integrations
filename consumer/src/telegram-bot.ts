@@ -13,7 +13,7 @@ export const botter = async () => {
     bot.onText(/\/stop/, (msg) => {
         const chatId = msg.chat.id;
         bot.sendMessage(chatId, "🛑 Stopping alerts...");
-        global.alerts = true;
+        // global.alerts = true;
     });
 
     //& [/start]
@@ -26,7 +26,7 @@ export const botter = async () => {
     you can cancel the alerting anytime by sending me the command */stop*`,
             { parse_mode: "Markdown" });
 
-        global.alerts = false;
+        // global.alerts = false;
 
     });
 
@@ -40,16 +40,18 @@ export const botter = async () => {
         const alertBody = global.alertList.join("\n");
         const alertText = alertTitle + "\n" + alertBody;
         bot.sendMessage(chatId, alertText, { parse_mode: "Markdown" });
-        // global.alertList = [];
+
+        global.alertList.length = 0;
     });
+
+    //& [/what]
+    bot.onText(/\/what/, (msg) => {
+        alert(65498889, "🚨 *ALERT* 🚨");
+    });
+
+
 };
 
-export const alert = async (chatId: any, alertInfo: any) => {
-
-    if (!global.alerts && global.alertList.length > 0) {
-        bot.sendMessage(chatId, alertInfo, { parse_mode: "Markdown" })
-        global.alertList.length = 0;
-
-        // bot.sendMessage(chatId, alertInfo, { parse_mode: "Markdown" });
-    }
+export const alert = (chatId: any, alertInfo: any) => {
+    bot.sendMessage(chatId, alertInfo, { parse_mode: "Markdown" });
 };

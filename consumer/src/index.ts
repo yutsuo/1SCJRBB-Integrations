@@ -1,6 +1,9 @@
 import * as dotenv from "dotenv";
 import colors from "colors";
 import * as amqplib from "amqplib";
+import sleep from "sleep-promise";
+import schedule from "node-schedule";
+
 import { botter, alert } from "./telegram-bot.js"
 
 dotenv.config();
@@ -38,9 +41,9 @@ botter();
       console.log("[consumer]".green, "Received:".cyan, msg.content.toString());
       consumerChannel.ack(msg);
 
-      let alertFlag = willAlert(JSON.parse(msg.content.toString()));
+      let willAlertFlag = willAlert(JSON.parse(msg.content.toString()));
 
-      if (alertFlag) {
+      if (willAlertFlag) {
         global.alertList.push(`
 🤖 ${JSON.parse(msg.content.toString()).id} 
 🌡️ ${JSON.parse(msg.content.toString()).sensors.temperature}⁰C 
@@ -48,19 +51,7 @@ botter();
         );
       };
 
-      const alertTitle = `🚨 *ALERT* 🚨
-🚁 These drones found dangerous conditions! 😱`;
-      const alertBody = global.alertList.join("\n");
-      const alertText = alertTitle + "\n" + alertBody;
-
-      console.log("willAlert()".yellow, alertFlag);
-
-
-      if (alertFlag) {
-        alert(global.chatId, alertText);
-      }
-
-
+      console.log("willAlert()".yellow, willAlertFlag);
 
     } else {
       console.log("[consumer]".green, "Consumer cancelled by server".red);
@@ -71,6 +62,10 @@ botter();
     consumerChannel.close()
       .then(() => console.log("[consumer]".green, "graceful shutdown".red))
       .then(() => process.exit(0));
+  });
+
+  const job: schedule.Job = schedule.scheduleJob("* * * * * *", async () => {
+    await alert(65498889, "🚨 *ALERT* 🚨")
   });
 
 })();

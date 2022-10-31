@@ -19,7 +19,7 @@ console.log("[producer]".blue, "Sending Drones inputs...");
     producerChannel.sendToQueue(queue, Buffer.from(drone.getInfo()));
   }, 1000);
 
-  process.on("SIGINT"||"SIGTERM", function () {
+  process.on("SIGINT"||"SIGTERM"||"SIGKILL", function () {
     producerChannel.close()
       .then(() => console.log("[producer]".blue, "graceful shutdown".red))
       .then(() => process.exit(0));

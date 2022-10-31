@@ -55,7 +55,7 @@ botter();
     }
   });
 
-  process.on("SIGINT"||"SIGTERM", function () {
+  process.on("SIGINT"||"SIGTERM"||"SIGKILL", function () {
     consumerChannel.close()
       .then(() => console.log("[consumer]".green, "graceful shutdown".red))
       .then(() => process.exit(0));

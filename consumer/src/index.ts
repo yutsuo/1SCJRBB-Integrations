@@ -2,8 +2,7 @@ import * as dotenv from "dotenv";
 import colors from "colors";
 import * as amqplib from "amqplib";
 
-import { botter, alert } from "./telegram-bot.js"
-import { alertEmitter } from "./event.js"
+import { botter } from "./telegram-bot.js"
 
 dotenv.config();
 colors.enable();

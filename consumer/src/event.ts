@@ -3,16 +3,6 @@ import { alert } from "./telegram-bot.js";
 
 export const alertEmitter = new EventEmitter();
 
-alertEmitter.on("event", () => { console.log("event triggered".cyan) });
-
-alertEmitter.on("alertOnOff", () => {
-    console.log(`global.alerts => ${global.alerts}`.bgCyan);
-});
-
-alertEmitter.on("toggle", () => {
-    global.alerts = !global.alerts;
-});
-
 alertEmitter.on("alertStart", () => {
 
     global.intervalAlert = setInterval(() => {

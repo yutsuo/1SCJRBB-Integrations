@@ -15,7 +15,6 @@ export const botter = async () => {
         const chatId = msg.chat.id;
         bot.sendMessage(chatId, "🛑 Stopping alerts...");
         alertEmitter.emit("alertStop");
-        // global.alerts = true;
     });
 
     //& [/start]

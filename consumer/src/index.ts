@@ -5,8 +5,6 @@ import * as amqplib from "amqplib";
 import { botter, alert } from "./telegram-bot.js"
 import { alertEmitter } from "./event.js"
 
-global.alerts = false;
-
 dotenv.config();
 colors.enable();
 

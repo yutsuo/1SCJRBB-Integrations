@@ -1,4 +1,5 @@
 import TelegramBot from "node-telegram-bot-api";
+import { alertEmitter } from "./event.js"
 
 const TOKEN = "5765209441:AAHdJXX8VwjH57U6Xiu7O3H2A8fqtzoNujY";
 
@@ -13,6 +14,7 @@ export const botter = async () => {
     bot.onText(/\/stop/, (msg) => {
         const chatId = msg.chat.id;
         bot.sendMessage(chatId, "🛑 Stopping alerts...");
+        alertEmitter.emit("alertStop");
         // global.alerts = true;
     });
 
@@ -26,29 +28,9 @@ export const botter = async () => {
     you can cancel the alerting anytime by sending me the command */stop*`,
             { parse_mode: "Markdown" });
 
-        // global.alerts = false;
+        alertEmitter.emit("alertStart");
 
     });
-
-    //& [/test]
-    bot.onText(/\/test/, (msg) => {
-        const chatId = msg.chat.id;
-        bot.sendMessage(chatId, "message received");
-        console.log("global.alertList =>".bgCyan, global.alertList);
-        const alertTitle = `🚨 *ALERT* 🚨
-🚁 These drones found dangerous conditions! 😱`;
-        const alertBody = global.alertList.join("\n");
-        const alertText = alertTitle + "\n" + alertBody;
-        bot.sendMessage(chatId, alertText, { parse_mode: "Markdown" });
-
-        global.alertList.length = 0;
-    });
-
-    //& [/what]
-    bot.onText(/\/what/, (msg) => {
-        alert(65498889, "🚨 *ALERT* 🚨");
-    });
-
 
 };
 

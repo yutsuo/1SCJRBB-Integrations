@@ -1,15 +1,14 @@
 import * as dotenv from "dotenv";
 import colors from "colors";
 import * as amqplib from "amqplib";
-import sleep from "sleep-promise";
-import schedule from "node-schedule";
 
 import { botter, alert } from "./telegram-bot.js"
+import { alertEmitter } from "./event.js"
+
+global.alerts = false;
 
 dotenv.config();
 colors.enable();
-
-global.alerts = true;
 
 console.log("[consumer]".green, "Receiving Drones inputs...");
 
@@ -62,10 +61,6 @@ botter();
     consumerChannel.close()
       .then(() => console.log("[consumer]".green, "graceful shutdown".red))
       .then(() => process.exit(0));
-  });
-
-  const job: schedule.Job = schedule.scheduleJob("* * * * * *", async () => {
-    await alert(65498889, "🚨 *ALERT* 🚨")
   });
 
 })();

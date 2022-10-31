@@ -17,7 +17,7 @@ console.log("[producer]".blue, "Sending Drones inputs...");
 
   setInterval(() => {
     producerChannel.sendToQueue(queue, Buffer.from(drone.getInfo()));
-  }, 1000);
+  }, 10000);
 
   process.on("SIGINT"||"SIGTERM"||"SIGKILL", function () {
     producerChannel.close()

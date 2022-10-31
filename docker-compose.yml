@@ -1,0 +1,29 @@
+---
+services:
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    network_mode: "host"
+  
+  producer:
+    container_name: producer
+    restart: unless-stopped
+    build: 
+      context: ./producer
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    container_name: consumer
+    restart: unless-stopped
+    build: ./consumer
+    network_mode: "host"
+    depends_on:
+      - rabbitmq
+      - producer

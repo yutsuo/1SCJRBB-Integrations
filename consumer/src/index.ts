@@ -43,8 +43,7 @@ botter();
         global.alertList.push(`
 🤖 ${JSON.parse(msg.content.toString()).id} 
 🌐 [${JSON.parse(msg.content.toString()).location.lat} | ${JSON.parse(msg.content.toString()).location.lng}](https://www.google.com/maps/search/?api=1&query=${JSON.parse(msg.content.toString()).location.lat}%2C${JSON.parse(msg.content.toString()).location.lng})
-🌡️ ${JSON.parse(msg.content.toString()).sensors.temperature}⁰C 
-☔ ${JSON.parse(msg.content.toString()).sensors.humidity}%`
+🌡️ ${JSON.parse(msg.content.toString()).sensors.temperature}⁰C ☔ ${JSON.parse(msg.content.toString()).sensors.humidity}%`
         );
       };
 

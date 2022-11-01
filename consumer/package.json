@@ -1,19 +1,20 @@
 {
   "name": "scraper",
   "version": "1.0.0",
-  "description": "Simple Scraper to store data from Prometheus queries",
+  "description": "RabbitMQ Consumer and Telegram Bot for the win!",
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tsc && nodemon ./dist/index.js",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "https://gitex.labbs.com.br/monitor/build/scraper.git"
   },
-  "author": "F2256342 Daniel de Oliveira Carvalho",
+  "author": "FIAP Mosqueteiros",
   "license": "ISC",
   "dependencies": {
     "amqplib": "^0.10.3",

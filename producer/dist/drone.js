@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IDrone } from "./types/drone.js";
-
 export const createDrone = () => {
-    const droneInfo: IDrone = {
+    const droneInfo = {
         id: 'drone-1',
         tracking: true,
         location: {
@@ -16,31 +14,24 @@ export const createDrone = () => {
     };
     return droneInfo;
 };
-
 export const humidityGenerator = () => {
     return Math.floor(Math.random() * 100);
 };
-
 export const temperatureGenerator = () => {
     return Math.floor(Math.random() * (40 - (-30)) + (-25));
 };
-
 export const latGenerator = () => {
     return parseFloat((Math.random() * (90 - (-90)) + (-90)).toFixed(6));
 };
-
 export const lngGenerator = () => {
     return parseFloat((Math.random() * (180 - (-180)) + (-180)).toFixed(6));
 };
-
 export const uuidGenerator = () => {
     return uuidv4();
 };
-
 export const onOffGenerator = () => {
     return Math.random() > 0.5 ? true : false;
 };
-
 export const getInfo = () => {
     const drone = createDrone();
     drone.id = uuidGenerator();

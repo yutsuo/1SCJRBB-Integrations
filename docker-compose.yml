@@ -12,12 +12,11 @@ services:
   producer:
     container_name: producer
     restart: unless-stopped
-    build: 
-      context: ./producer
-      dockerfile: Dockerfile
+    build: ./producer
     network_mode: "host"
     depends_on:
       - rabbitmq
+    entrypoint: ./wait.sh
 
   consumer:
     container_name: consumer
@@ -27,3 +26,4 @@ services:
     depends_on:
       - rabbitmq
       - producer
+    entrypoint: ./wait.sh

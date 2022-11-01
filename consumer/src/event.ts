@@ -16,7 +16,7 @@ alertEmitter.on("alertStart", () => {
 
             global.alertList.length = 0;
         }
-    }, 10000);
+    }, 60000);
 });
 
 alertEmitter.on("alertStop", () => {
